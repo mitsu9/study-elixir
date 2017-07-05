@@ -25,3 +25,8 @@ IO.puts MyList.mapsum([1, 2, 3], &(&1 * &1))
 IO.puts MyList.max([1, 5, 7, 2, 4])
 IO.puts MyList.ceasar('ryvkve', 13)
 IO.inspect MyList.span(3, 6)
+
+# 2からnまでの素数のリストを作る
+n = 30
+primes = for x <- 3..n, Enum.all?(MyList.span(2, x-1), &(rem(x, &1) != 0)), into: [2], do: x
+IO.inspect primes
