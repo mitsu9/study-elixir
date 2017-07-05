@@ -15,8 +15,13 @@ defmodule MyList do
   def ceasar([], _n), do: []
   def ceasar([head | tail], n) when 122 < head+n, do: [head+n-26, ceasar(tail, n)]
   def ceasar([head | tail], n), do: [head+n, ceasar(tail, n)]
+
+  # span(from, to)
+  def span(to, to), do: [to]
+  def span(from, to), do: [from | span(from+1, to)]
 end
 
 IO.puts MyList.mapsum([1, 2, 3], &(&1 * &1))
 IO.puts MyList.max([1, 5, 7, 2, 4])
 IO.puts MyList.ceasar('ryvkve', 13)
+IO.inspect MyList.span(3, 6)
