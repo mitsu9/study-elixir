@@ -32,6 +32,7 @@ defmodule Scheduler do
       { :ready, pid } ->
         send pid, {:shutdown}
         if length(processes) > 1 do
+          # queueは空 = 計算するものはない, processesはある = 結果待ちのものがある
           schedule_processes(List.delete(processes, pid), queue, results)
         else
           Enum.sort(results, fn {n1,_}, {n2,_} -> n1 <= n2 end)
@@ -43,7 +44,7 @@ defmodule Scheduler do
   end
 end
 
-to_process = [37, 37, 37, 37, 37, 37]
+to_process = [35, 34, 36, 37, 37, 37]
 
 Enum.each 1..10, fn num_processes ->
   { time, result } = :timer.tc(
